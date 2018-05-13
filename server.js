@@ -56,8 +56,8 @@ var initDb = function(callback) {
   });
 };
 
-app.use(express.static(__dirname + './views/images'));
-app.use(express.static(__dirname + './bower_components'));
+//app.use(express.static(__dirname + './views/images'));
+//app.use(express.static(__dirname + './bower_components'));
 
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
