@@ -2,6 +2,10 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
+
+var path = require('path');
+var mongoose = require('mongoose');
+var cotasRouter = require('./routes/cotasRouter');
     
 Object.assign=require('object-assign')
 
@@ -12,6 +16,8 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
+
+mongoURL = 'mongodb://localhost:27017/comprecotas'; //DEBUG 
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
@@ -32,6 +38,20 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
   }
 }
+
+
+
+
+mongoose.connect(mongoURL);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    // we're connected!
+    console.log("Connected correctly to server");
+});
+
+/* //conection use mongoDB native
+
 var db = null,
     dbDetails = new Object();
 
@@ -39,12 +59,14 @@ var initDb = function(callback) {
   if (mongoURL == null) return;
 
   var mongodb = require('mongodb');
-  if (mongodb == null) return;
+ 
+ if (mongodb == null) return;
 
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
-      callback(err);
-      return;
+      	callback(err);
+		console.log('Problem to connect MongoDB');
+    	return;
     }
 
     db = conn;
@@ -54,10 +76,11 @@ var initDb = function(callback) {
 
     console.log('Connected to MongoDB at: %s', mongoURL);
   });
-};
+};*/
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static('views'));
-app.use(express.static('bower_components'));
+//app.use(express.static('views'));
+//app.use(express.static('bower_components'));
 
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
@@ -73,12 +96,14 @@ app.get('/', function (req, res) {
       if (err) {
         console.log('Error running count. Message:\n'+err);
       }
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+     // res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
     res.render('index.html', { pageCountMessage : null});
   }
 });
+
+app.use('/cotas', cotasRouter);
 
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
@@ -101,9 +126,9 @@ app.use(function(err, req, res, next){
   res.status(500).send('Something bad happened!');
 });
 
-initDb(function(err){
+/*initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
-});
+});*/
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);

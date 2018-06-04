@@ -11,17 +11,18 @@
     <title>CompreCotas - Sem burocracias!</title>
 
     <!-- Bootstrap core CSS -->
-    <!--<link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">-->
+  <!--  <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">-->
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
 
-  <!--<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet"> -->
+
 
     <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
+   <!-- <link href="album.css" rel="stylesheet">-->
   </head>
 
   <body>
@@ -64,11 +65,51 @@
           <h1 class="jumbotron-heading">Compre Cotas</h1>
           <p class="lead text-muted">Compra e venda de cotas imobiliárias é sempre um bom negócio</p>
           <p>
-            <a href="#" class="btn btn-primary my-2">Venda</a>
+            <a href="#collapsevenda" class="btn btn-primary my-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsevenda" >Venda</a>
             <a href="#" class="btn btn-secondary my-2">Compre</a>
           </p>
         </div>
+        <div class="collapse" id = "collapsevenda">
+            <div class = "card card-body container text-left"  ng-controller="VendaController">
+                <form>
+                    <div class="form-group">
+                      <label for="Nome">Nome</label>
+                      <input type="text" class="form-control" id="Nome" aria-describedby="Nome" placeholder="Nome" ng-model= "user.name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="Email">Email</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="email" ng-model= "user.email">
+                    </div>
+                    <div class="form-group">
+                        <label for="fone">Telefone</label>
+                        <input type="text" class="form-control" id="fone" aria-describedby="Telefone" placeholder="Telefone" ng-model= "user.reference" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inf_cota">Dados da cota</label>
+                        <input type="text" class="form-control" id="inf_cota" aria-describedby="informaçoes sobre a cota" placeholder="informações da cota">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inf_preco">Valor venda</label>required
+                        <input type="text" class="form-control" id="inf_preco" aria-describedby="Preço" placeholder="Preço" >
+                    </div>
+
+                    <div class="custom-file">
+
+                        <label class="custom-file-label" for="validatedCustomFile">Adcionar imagem</label>
+                        <input type="file" class="custom-file-input" id="validatedCustomFile" >
+                        
+                      </div>
+                    <br><br>
+                    <button type="submit" class="btn btn-primary" ng-click="submitVenda(user)">Submit</button>
+                  </form>
+
+            </div>
+          </div>
       </section>
+
+      
 
       <div class="album py-5 bg-light">
         <div class="container">
@@ -230,11 +271,10 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../bower_components/angular/angular.min.js"></script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
 
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.18/angular-ui-router.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -242,10 +282,18 @@
 
     
 
-
-    <!--<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <!--<script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="../bower_components/ng-dialog/js/ngDialog.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../bower_components/jquery/dist/jquery.slim.min.js"></script>')</script>
     <script src="../bower_components/popper.js/dist/popper.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../bower_components/holderjs/holder.min.js"></script> -->
+    <script src="../bower_components/holderjs/holder.min.js"></script>-->
+
+    <scrip src= "scripts/controllers.js"></script>
+    <scrip src= "scripts/services.js"></script>
+    <scrip src= "scripts/app.js"></script>  
+
   </body>
 </html>

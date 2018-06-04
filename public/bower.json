@@ -1,0 +1,29 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/AntonioCelso/nodejs-ex-1",
+  "authors": [
+    "Antonio_Celso <atractorz@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.0",
+    "holderjs": "^2.9.4",
+    "bootstrap": "^4.1.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "angular-ui-router": "^1.0.18",
+    "angular-resource": "^1.7.0",
+    "ng-dialog": "ngDialog#^1.4.0",
+    "jquery-mask-plugin": "jquery-mask#^1.14.15"
+  }
+}

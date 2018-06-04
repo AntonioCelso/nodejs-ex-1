@@ -1,0 +1,339 @@
+
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/favicon.ico">
+
+    <title>CompreCotas - Sem burocracias!</title>
+
+    <!-- Bootstrap core CSS -->
+  <!--  <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">-->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+
+
+
+    <!-- Custom styles for this template -->
+   <!-- <link href="album.css" rel="stylesheet">-->
+  </head>
+
+  <body ng-app="ngComprecotaApp">
+
+   <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">Sobre</h4>
+              <p class="text-muted">Invista em cotas imobiliárias</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contatos</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Siga-nos no Twitter</a></li>
+                <li><a href="#" class="text-white">Curta no Facebook</a></li>
+                <li><a href="#" class="text-white">Nos envie Email</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <i class="fas fa-bullseye"></i><strong>&nbsp;CompreCotas</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Compre Cotas</h1>
+          <p class="lead text-muted">Compra e venda de cotas imobiliárias é sempre um bom negócio</p>
+          <p>
+            <a href="#collapsevenda" class="btn btn-primary my-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsevenda" >Venda</a>
+            <a href="#" class="btn btn-secondary my-2">Compre</a>
+          </p>
+        </div>
+        <div class="collapse" id = "collapsevenda">
+            <div class = "card card-body container text-left">
+                <form name="vendaCotas" ng-controller="VendaController">
+                    <div class="form-group">
+                        <label for="user_firstname">Nome</label>
+                        <input type="text" class="form-control" id="user_firstname" placeholder="Nome" ng-model= "user.name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="user_lastname">Sobrenome</label>
+                        <input type="text" class="form-control" id="user_lastname" placeholder="Sobrenome" ng-model= "user.lastname" required>
+                    </div>
+                     
+                    <div class="form-group">
+                        <label for="user_email">Email</label>
+                        <input type="email" class="form-control" id="user_email" aria-describedby="email" placeholder="email" ng-model= "user.email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_cel">Telefone móvel:</label>
+                        <input type="tel" size="10" class ="form-control" id="user_cel" placeholder="(11)1111-1111" ng-model="user.cel">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_fone">Telefone Fixo </label>
+                        <input type="tel" size ="10" class ="form-control" id="user_fone" placeholder="(11)1111-1111" ng-model="user.fone">
+                     </div>
+
+                     <div class="form-group">
+                        <div class="row">
+                          <legend class="col-form-label col-sm-3 pt-0">Melhor forma de contato</legend>
+                          <div class="col-sm-9">
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="user.prefercontact" value="WhatsApp" checked>
+                              <label class="form-check-label" for="gridRadios1">WhatsApp</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="user.prefercontact" value="Celular">
+                              <label class="form-check-label" for="gridRadios2">Celular</label>
+                            </div>
+                            <div class="form-check disabled">
+                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" ng-model="user.prefercontact" value="Fixo" >
+                              <label class="form-check-label" for="gridRadios3">Fixo</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="form-group">
+                        <label for="inf_cota">Dados da cota</label>
+                        <input type="text" class="form-control" id="inf_cota" aria-describedby="informaçoes sobre a cota" placeholder="informações da cota, número, parcelas pagas, inadimplente" ng-model= "user.reference">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inf_preco">Valor venda</label>
+                        <input type="number" class="form-control" id="inf_preco" aria-describedby="Preço" placeholder="00,00" ng-model = "user.price" required >
+                    </div>
+
+                  <!--<div class="custom-file">
+
+                        <label class="custom-file-label" for="validatedCustomFile"></label>
+                        <input type="file" class="custom-file-input" id="validatedCustomFile" >
+                        <label >Inserir imagem:</label>
+                        <input type="file" class="form-control-file" id="validatedCustomFile" accept="image/*" multiple>
+                        
+                      </div>-->
+                    <br><br>
+                    <button type="submit" class="btn btn-primary" ng-click="submitVenda(user)">Submit</button>
+                  </form>
+
+            </div>
+          </div>
+      </section>
+
+      
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img src="./images/1.jpeg" class="card-img-top"  alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Cota Laranjeira 50000</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Veja</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Compre</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img src="./images/2.jpeg" class="card-img-top"  alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img src="./images/3.jpeg" class="card-img-top"  alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+      </div>
+    </footer>
+  
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.18/angular-ui-router.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.0/angular-resource.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>-->
+
+   
+       
+
+    <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="./bower_components/ng-dialog/js/ngDialog.min.js"></script>
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="./bower_components/jquery-mask-plugin/src/jquery.mask.js"></script>
+   <!-- <script>window.jQuery || document.write('<script src="../bower_components/jquery/dist/jquery.slim.min.js"></script>')</script>
+    <script type="text/javascript" src="./bower_components/popper.js/dist/popper.min.js"></script>-->
+    <script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./bower_components/holderjs/holder.min.js"></script>
+
+    <script type="text/javascript" src= "./scripts/app.js"></script> 
+    <script type="text/javascript" src= "./scripts/controllers.js"></script>
+    <script type="text/javascript" src= "./scripts/services.js"></script>
+
+  </body>
+</html>
