@@ -44,7 +44,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
 mongoose.connect(mongoURL);
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'erros de conexão:'));
 db.once('open', function () {
     // we're connected!
     console.log("Connected correctly to server");
