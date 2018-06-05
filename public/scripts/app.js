@@ -32,3 +32,4 @@ jQuery("#user_cel")
                 element.mask("(99) 9999-9999");  
             }  
         });
+

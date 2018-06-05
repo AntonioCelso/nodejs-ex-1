@@ -66,16 +66,17 @@
           <h1 class="jumbotron-heading">Compre Cotas</h1>
           <p class="lead text-muted">Compra e venda de cotas imobiliárias é sempre um bom negócio</p>
           <p>
-            <a href="#collapsevenda" class="btn btn-primary my-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsevenda" >Venda</a>
-            <a href="#" class="btn btn-secondary my-2">Compre</a>
+            <a href="#collapsevenda" class="btn btn-primary my-2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsevenda" >Venda agora!</a>
+            <!--<a href="#" class="btn btn-secondary my-2">Compre</a>-->
           </p>
         </div>
         <div class="collapse" id = "collapsevenda">
-            <div class = "card card-body container text-left">
-                <form name="vendaCotas" ng-controller="VendaController">
+            <div class = "card card-body container text-left" ng-controller="VendaController">
+                <form name="vendaCotas">
                     <div class="form-group">
                         <label for="user_firstname">Nome</label>
-                        <input type="text" class="form-control" id="user_firstname" placeholder="Nome" ng-model= "user.name" required>
+                        <input type="text" class="form-control" id="user_firstname" placeholder="Nome" ng-model= "user.firstname" required="">
+  
                     </div>
                     
                     <div class="form-group">
@@ -85,18 +86,18 @@
                      
                     <div class="form-group">
                         <label for="user_email">Email</label>
-                        <input type="email" class="form-control" id="user_email" aria-describedby="email" placeholder="email" ng-model= "user.email" required>
+                        <input type="email" class="form-control" id="user_email" aria-describedby="email" placeholder="Email" ng-model= "user.email" required>
                     </div>
 
                     <div class="form-group">
                         <label for="user_cel">Telefone móvel:</label>
-                        <input type="tel" size="10" class ="form-control" id="user_cel" placeholder="(11)1111-1111" ng-model="user.cel">
+                        <input type="tel" size="10" class ="form-control" id="user_cel" placeholder="(11)1111-1111" ng-model="user.cel" ng-minlength="10" required>
 
                     </div>
 
                     <div class="form-group">
                         <label for="user_fone">Telefone Fixo </label>
-                        <input type="tel" size ="10" class ="form-control" id="user_fone" placeholder="(11)1111-1111" ng-model="user.fone">
+                        <input type="tel" size ="10" class ="form-control" id="user_fone" placeholder="(11)1111-1111" ng-model="user.fone" ng-minlength="10"  required>
                      </div>
 
                      <div class="form-group">
@@ -121,12 +122,17 @@
 
                     <div class="form-group">
                         <label for="inf_cota">Dados da cota</label>
-                        <input type="text" class="form-control" id="inf_cota" aria-describedby="informaçoes sobre a cota" placeholder="informações da cota, número, parcelas pagas, inadimplente" ng-model= "user.reference">
+                        <input type="text" class="form-control" id="inf_cota" aria-describedby="informaçoes sobre a cota" placeholder="informações da cota, número, parcelas pagas, inadimplente" ng-model= "user.reference" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inf_pagamento">informações sobre pagamento (não aparecerá para compradores):</label>
+                      <input type="text" class="form-control" id="inf_pagamento" aria-describedby="informaçoes sobre a cota" placeholder="Formas de pagamentos, permuta..." ng-model= "user.pagamento">
                     </div>
 
                     <div class="form-group">
                         <label for="inf_preco">Valor venda</label>
-                        <input type="number" class="form-control" id="inf_preco" aria-describedby="Preço" placeholder="00,00" ng-model = "user.price" required >
+                        <input type="text" class="form-control" id="inf_preco" aria-describedby="Preço" placeholder="00,00" ng-model = "user.price" required >
                     </div>
 
                   <!--<div class="custom-file">
@@ -137,12 +143,23 @@
                         <input type="file" class="form-control-file" id="validatedCustomFile" accept="image/*" multiple>
                         
                       </div>-->
-                    <br><br>
-                    <button type="submit" class="btn btn-primary" ng-click="submitVenda(user)">Submit</button>
-                  </form>
+                    <div class ="form-group">
+                      <label for="termos"> Aceito os termos e condições de uso do CompreCotas</label>
+                      <input type="checkbox" ng-model="user.termo" name="termos" required/>
+                    </div>
 
-            </div>
+                    <div class="g-recaptcha" data-sitekey="6Lf5Rl0UAAAAAA1yHBWXB2vlTGD23uAzNaZcDuvR"></div>
+
+                    <br><br>
+                    <button type="submit" class="btn btn-primary" ng-click="submitVenda(user)" ng-disabled="vendaCotas.$invalid" ng-if="!vendaCotaForm">Vender</button>
+  
+                  </form>
+                  <div class="alert alert-success" ng-if="vendaCotaForm" role="alert">
+                      {{nomeVendedor}}, muito obrigado entraremos em contato em breve!
+                    </div>
+            </div> <!--fim do vendacontroller-->
           </div>
+       
       </section>
 
       
@@ -150,22 +167,117 @@
       <div class="album py-5 bg-light">
         <div class="container">
 
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img src="./images/1.jpeg" class="card-img-top"  alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">Cota Laranjeira 50000</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Veja</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Compre</button>
+          <div class="row" ng-controller="compraController">
+
+              <div class="modal fade" id="compraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="compraModalLabel">Fale com corretor:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form name="compraCotas">
+                              <div class="form-group">
+                                  <label for="user_firstname">Nome</label>
+                                  <input type="text" class="form-control" id="user_firstname" placeholder="Nome" ng-model= "user.firstname" required="">
+            
+                              </div>
+                              
+                              <div class="form-group">
+                                  <label for="user_lastname">Sobrenome</label>
+                                  <input type="text" class="form-control" id="user_lastname" placeholder="Sobrenome" ng-model= "user.lastname" required>
+                              </div>
+                               
+                              <div class="form-group">
+                                  <label for="user_email">Email</label>
+                                  <input type="email" class="form-control" id="user_email" aria-describedby="email" placeholder="Email" ng-model= "user.email" required>
+                              </div>
+          
+                              <div class="form-group">
+                                  <label for="user_cel">Telefone móvel:</label>
+                                  <input type="tel" size="10" class ="form-control" id="user_cel" placeholder="(11)1111-1111" ng-model="user.cel" ng-minlength="10" required>
+          
+                              </div>
+          
+                              <div class="form-group">
+                                  <label for="user_fone">Telefone Fixo </label>
+                                  <input type="tel" size ="10" class ="form-control" id="user_fone" placeholder="(11)1111-1111" ng-model="user.fone" ng-minlength="10"  required>
+                               </div>
+          
+                               <div class="form-group">
+                                  <div class="row">
+                                    <legend class="col-form-label col-sm-3 pt-0">Melhor forma de contato</legend>
+                                    <div class="col-sm-9">
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="user.prefercontact" value="WhatsApp" checked>
+                                        <label class="form-check-label" for="gridRadios1">WhatsApp</label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="user.prefercontact" value="Celular">
+                                        <label class="form-check-label" for="gridRadios2">Celular</label>
+                                      </div>
+                                      <div class="form-check disabled">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" ng-model="user.prefercontact" value="Fixo" >
+                                        <label class="form-check-label" for="gridRadios3">Fixo</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+          
+                              <div class="form-group">
+                                  <label for="inf_cota">Proposta</label>
+                                  <input type="text" class="form-control" id="inf_cota" aria-describedby="Proposta para compra da cota" placeholder="Proposta de compra, permuta, forma de pagamento" ng-model= "user.reference" required>
+                              </div>
+          
+                            
+                              <div class ="form-group">
+                                <label for="termos"> Aceito os termos e condições de uso do CompreCotas</label>
+                                <input type="checkbox" ng-model="user.termo" name="termos" required/>
+                              </div>
+          
+                              <div class="g-recaptcha" data-sitekey="6Lf5Rl0UAAAAAA1yHBWXB2vlTGD23uAzNaZcDuvR"></div>
+          
+          
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" ng-click="submitCompra(user)" ng-disabled="vendaCotas.$invalid" ng-if="!vendaCotaForm">Enviar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        
+                      </div>
+                    </form>
                     </div>
-                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+            
+            <div class="col-md-4" ng-repeat="venda in vendas | filter : { publish : false}">
+              <div class="card mb-4 box-shadow">
+                <div layout-align="center center">
+                  <img ng-src={{venda.image}} class="card-img-top"  alt="Card image cap">
+                  <h3><p style="text-align: center"> <span class="badge badge-pill badge-warning">{{venda.price | currency : "R$" : 2}}</span></p></h3>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{venda.reference}}</p>
+                  
+                  <div class="d-flex justify-content-between align-items-center">
+                      
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#compraModal">Falar com corretor!</button>
+                    </div>
+                    <small class="text-muted">{{venda.createdAt | date: dd/LLLL/yy}}</small>
                   </div>
                 </div>
               </div>
             </div>
+
+          
+      
+      
+
+
             <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img src="./images/2.jpeg" class="card-img-top"  alt="Card image cap">
@@ -330,6 +442,8 @@
     <script type="text/javascript" src="./bower_components/popper.js/dist/popper.min.js"></script>-->
     <script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./bower_components/holderjs/holder.min.js"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <script type="text/javascript" src= "./scripts/app.js"></script> 
     <script type="text/javascript" src= "./scripts/controllers.js"></script>

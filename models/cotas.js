@@ -7,16 +7,38 @@ var Currency = mongoose.Types.Currency;
 
 // create a schema
 var cotaSchema = new Schema({
-    name: {
+    firstname: {
         type: String
     },
-    image: {
+	
+	lastname: {
         type: String
     },
+    
+	image: {
+        type: String
+    },
+	
+	email: {
+        type: String
+    },
+
+	cel: {
+        type: String
+    },
+
+	fone: {
+        type: String
+    },
+
     reference: {
         type: String
     },
-    label: {
+    prefercontact: {
+        type: String
+    },
+
+	 pagamento: {
         type: String
     },
     price: {
@@ -25,9 +47,7 @@ var cotaSchema = new Schema({
     commission:{
         type:Currency
     },
-    description: {
-        type: String
-    },
+    
     publish: {
         type: Boolean
     }

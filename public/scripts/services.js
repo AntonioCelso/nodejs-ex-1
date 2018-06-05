@@ -12,4 +12,10 @@ angular.module("ngComprecotaApp")
             }
         });
     }])
+
+    .factory('compraFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "cotas/:id");
+
+    }])
 ;
