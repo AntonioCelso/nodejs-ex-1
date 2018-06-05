@@ -11,6 +11,7 @@
     "express": "^4.16.3",
     "mocha": "^2.4.5",
     "mongodb": "^2.1.16",
+    "mongoose": "^4.13.14",
     "mongoose-currency": "^0.2.0",
     "morgan": "^1.7.0",
     "object-assign": "4.1.0",
